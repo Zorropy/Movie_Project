@@ -1,3 +1,6 @@
+import statistics as stats
+
+
 def get_user_rating():
     while True:
         try:
@@ -52,13 +55,50 @@ def update_movie(movies):
     print(f"Movie {title_input} successfully updated")
 
 
+def movie_stats(movies):
+    average_rating(movies)
+    median_rating(movies)
+    best_movie(movies)
+    worst_movie(movies)
+
+
+def average_rating(movies):
+    average = round(sum(movies.values()) / len(movies), 2)
+    print(f"Average rating: {average}")
+    print()
+
+
+def median_rating(movies):
+    median = stats.median(movies.values())
+    print(f"Median rating: {median}")
+    print()
+
+
+def best_movie(movies):
+    best_rating = sorted(movies.values(), reverse=True)[0]
+    print("Best movie(s):")
+    for title, rating in movies.items():
+        if best_rating == rating:
+            print(f"{title}: {rating}")
+    print()
+
+
+def worst_movie(movies):
+    worst_rating = sorted(movies.values())[0]
+    print("Worst movie(s):")
+    for title, rating in movies.items():
+        if worst_rating == rating:
+            print(f"{title}: {rating}")
+    print()
+
 
 def main():
     func_dict = {0: exit_program,
                  1: list_movies,
                  2: add_movie,
                  3: delete_movie,
-                 4: update_movie}
+                 4: update_movie,
+                 5: movie_stats}
     # Dictionary to store the movies and the rating
     movies = {
         "The Shawshank Redemption": 9.5,
