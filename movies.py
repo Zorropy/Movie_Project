@@ -9,12 +9,31 @@ def list_movies(movies):
         print(f"{title}: {rating}")
 
 
+def add_movie(movies):
+    title_input = input("Enter new movie name: ").capitalize()
+    if not title_input.strip():
+        print("A movie name must be provided.")
+        return
+    if title_input in movies:
+        print(f"Movie {title_input} already exists!")
 
+    while True:
+        try:
+            rating_input = float(input("Enter new movie rating (0-10): "))
+            if not 0 <= rating_input <= 10:
+                raise ValueError
+            break
+        except ValueError:
+            print("Error. Please enter a number between 0-10")
+
+    movies[title_input] = rating_input
+    print(f"Movie {title_input} successfully added")
 
 
 def main():
     func_dict = {0: exit_program,
-                 1: list_movies}
+                 1: list_movies,
+                 2: add_movie}
     # Dictionary to store the movies and the rating
     movies = {
         "The Shawshank Redemption": 9.5,
