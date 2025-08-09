@@ -1,3 +1,14 @@
+def get_user_rating():
+    while True:
+        try:
+            rating_input = float(input("Enter new movie rating (0-10): "))
+            if not 0 <= rating_input <= 10:
+                raise ValueError
+            return rating_input
+        except ValueError:
+            print("Error. Please enter a number between 0-10")
+
+
 def exit_program(movies):
     print("Bye!!!")
     exit()
@@ -17,15 +28,7 @@ def add_movie(movies):
     if title_input in movies:
         print(f"Movie {title_input} already exists!")
 
-    while True:
-        try:
-            rating_input = float(input("Enter new movie rating (0-10): "))
-            if not 0 <= rating_input <= 10:
-                raise ValueError
-            break
-        except ValueError:
-            print("Error. Please enter a number between 0-10")
-
+    rating_input = get_user_rating()
     movies[title_input] = rating_input
     print(f"Movie {title_input} successfully added")
 
@@ -39,12 +42,23 @@ def delete_movie(movies):
     print(f"Movie {movie_input} successfully deleted")
 
 
+def update_movie(movies):
+    title_input = input("Enter movie name: ").title()
+    if title_input not in movies:
+        print(f"Movie {title_input} doesn't exist!")
+        return
+    rating_input = get_user_rating()
+    movies.update({title_input: rating_input})
+    print(f"Movie {title_input} successfully updated")
+
+
 
 def main():
     func_dict = {0: exit_program,
                  1: list_movies,
                  2: add_movie,
-                 3: delete_movie}
+                 3: delete_movie,
+                 4: update_movie}
     # Dictionary to store the movies and the rating
     movies = {
         "The Shawshank Redemption": 9.5,
