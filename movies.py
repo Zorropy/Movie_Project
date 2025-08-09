@@ -3,8 +3,18 @@ def exit_program(movies):
     exit()
 
 
+def list_movies(movies):
+    print(f"{len(movies)} movies in total")
+    for title, rating in movies.items():
+        print(f"{title}: {rating}")
+
+
+
+
+
 def main():
-    func_dict = {0: exit_program}
+    func_dict = {0: exit_program,
+                 1: list_movies}
     # Dictionary to store the movies and the rating
     movies = {
         "The Shawshank Redemption": 9.5,
@@ -41,6 +51,7 @@ Enter choice (0-8): """, end="")
         except ValueError:
             print("Error. Please choose a number between 0-8.")
 
+        print()
         input("Press enter to continue...")
 
 
