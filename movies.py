@@ -10,7 +10,7 @@ def list_movies(movies):
 
 
 def add_movie(movies):
-    title_input = input("Enter new movie name: ").capitalize()
+    title_input = input("Enter new movie name: ").title()
     if not title_input.strip():
         print("A movie name must be provided.")
         return
@@ -30,10 +30,21 @@ def add_movie(movies):
     print(f"Movie {title_input} successfully added")
 
 
+def delete_movie(movies):
+    movie_input = input("Enter a movie name to delete: ").title()
+    if movie_input not in movies:
+        print(f"Movie {movie_input} doesn't exist!")
+        return
+    movies.pop(movie_input)
+    print(f"Movie {movie_input} successfully deleted")
+
+
+
 def main():
     func_dict = {0: exit_program,
                  1: list_movies,
-                 2: add_movie}
+                 2: add_movie,
+                 3: delete_movie}
     # Dictionary to store the movies and the rating
     movies = {
         "The Shawshank Redemption": 9.5,
