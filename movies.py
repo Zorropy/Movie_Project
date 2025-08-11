@@ -114,7 +114,10 @@ def search_movie(movies):
         print(f"No movies found for '{search_input}'")
 
 
-
+def sort_movies(movies):
+    sorted_movies = dict(sorted(movies.items(), key=lambda x: x[1], reverse=True))
+    for title, rating in sorted_movies.items():
+        print(f"{title}: {rating}")
 
 
 def main():
@@ -125,7 +128,8 @@ def main():
                  4: update_movie,
                  5: movie_stats,
                  6: random_movie,
-                 7: search_movie}
+                 7: search_movie,
+                 8: sort_movies}
     # Dictionary to store the movies and the rating
     movies = {
         "The Shawshank Redemption": 9.5,
