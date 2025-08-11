@@ -98,7 +98,22 @@ def random_movie(movies):
         print("No movies available.")
         return
     title, rating = random.choice(list(movies.items()))
-    print(f"Random movie: {title} (Rating: {rating})")
+    print(f"Your random movie for tonight: {title} (Rating: {rating})")
+
+
+def search_movie(movies):
+    search_input = input("Please enter movie name to search: ").strip().lower()
+    if not search_input:
+        return
+    movie_found = False
+    for movie in movies:
+        if search_input in movie.lower():
+            print(f"{movie}: {movies[movie]}")
+            movie_found = True
+    if not movie_found:
+        print(f"No movies found for '{search_input}'")
+
+
 
 
 
@@ -109,7 +124,8 @@ def main():
                  3: delete_movie,
                  4: update_movie,
                  5: movie_stats,
-                 6: random_movie}
+                 6: random_movie,
+                 7: search_movie}
     # Dictionary to store the movies and the rating
     movies = {
         "The Shawshank Redemption": 9.5,
