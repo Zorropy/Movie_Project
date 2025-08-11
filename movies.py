@@ -3,6 +3,10 @@ import random
 
 
 def get_user_rating():
+    """
+    Gets user input between 0-10 for movie rating
+    :return: Rating input as float
+    """
     while True:
         try:
             rating_input = float(input("Enter new movie rating (0-10): "))
@@ -14,17 +18,29 @@ def get_user_rating():
 
 
 def exit_program(movies):
+    """
+    Exits the program
+    :param movies:  Any
+    """
     print("Bye!!!")
     exit()
 
 
 def list_movies(movies):
+    """
+    Lists all movie titles and ratings
+    :param movies: Movies and their ratings as dictionary
+    """
     print(f"{len(movies)} movies in total")
     for title, rating in movies.items():
         print(f"{title}: {rating}")
 
 
 def add_movie(movies):
+    """
+    Adds a new movie and its rating to the dictionary
+    :param movies: Movies and their ratings as dictionary
+    """
     title_input = input("Enter new movie name: ").title()
     if not title_input.strip():
         print("A movie name must be provided.")
@@ -38,6 +54,10 @@ def add_movie(movies):
 
 
 def delete_movie(movies):
+    """
+    Deletes a movie entry from the dictionary
+    :param movies: Movies and their ratings as dictionary
+    """
     movie_input = input("Enter a movie name to delete: ").title()
     if movie_input not in movies:
         print(f"Movie {movie_input} doesn't exist!")
@@ -47,6 +67,10 @@ def delete_movie(movies):
 
 
 def update_movie(movies):
+    """
+    Updates a movie's rating in the dictionary
+    :param movies: Movies and their ratings as dictionary
+    """
     title_input = input("Enter movie name: ").title()
     if title_input not in movies:
         print(f"Movie {title_input} doesn't exist!")
@@ -57,6 +81,10 @@ def update_movie(movies):
 
 
 def movie_stats(movies):
+    """
+    Prints the average and median rating, as well as best and worst movie by rating
+    :param movies: Movies and their ratings as dictionary
+    """
     average_rating(movies)
     median_rating(movies)
     best_movie(movies)
@@ -64,18 +92,30 @@ def movie_stats(movies):
 
 
 def average_rating(movies):
+    """
+    Prints the average rating of all movies
+    :param movies: Movies and their ratings as dictionary
+    """
     average = round(sum(movies.values()) / len(movies), 2)
     print(f"Average rating: {average}")
     print()
 
 
 def median_rating(movies):
+    """
+    Prints the median rating of all movies
+    :param movies: Movies and their ratings as dictionary
+    """
     median = stats.median(movies.values())
     print(f"Median rating: {median}")
     print()
 
 
 def best_movie(movies):
+    """
+    Prints the best movie(s) by rating
+    :param movies: Movies and their ratings as dictionary
+    """
     best_rating = sorted(movies.values(), reverse=True)[0]
     print("Best movie(s):")
     for title, rating in movies.items():
@@ -85,6 +125,10 @@ def best_movie(movies):
 
 
 def worst_movie(movies):
+    """
+    Prints the worst movie(s) by rating
+    :param movies: Movies and their ratings as dictionary
+    """
     worst_rating = sorted(movies.values())[0]
     print("Worst movie(s):")
     for title, rating in movies.items():
@@ -94,6 +138,10 @@ def worst_movie(movies):
 
 
 def random_movie(movies):
+    """
+    Prints a random movie and its rating
+    :param movies: Movies and their ratings as dictionary
+    """
     if not movies:
         print("No movies available.")
         return
@@ -102,6 +150,10 @@ def random_movie(movies):
 
 
 def search_movie(movies):
+    """
+    Searches for a movie by substring
+    :param movies: Movies and their ratings as dictionary
+    """
     search_input = input("Please enter movie name to search: ").strip().lower()
     if not search_input:
         return
@@ -115,12 +167,17 @@ def search_movie(movies):
 
 
 def sort_movies(movies):
+    """
+    Prints all movies from best to worst
+    :param movies: Movies and their ratings as dictionary
+    """
     sorted_movies = dict(sorted(movies.items(), key=lambda x: x[1], reverse=True))
     for title, rating in sorted_movies.items():
         print(f"{title}: {rating}")
 
 
 def main():
+    """Prints the main menu and lets the user decide which function to use"""
     func_dict = {0: exit_program,
                  1: list_movies,
                  2: add_movie,
