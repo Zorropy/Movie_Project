@@ -1,4 +1,5 @@
 import statistics as stats
+import random
 
 
 def get_user_rating():
@@ -92,13 +93,23 @@ def worst_movie(movies):
     print()
 
 
+def random_movie(movies):
+    if not movies:
+        print("No movies available.")
+        return
+    title, rating = random.choice(list(movies.items()))
+    print(f"Random movie: {title} (Rating: {rating})")
+
+
+
 def main():
     func_dict = {0: exit_program,
                  1: list_movies,
                  2: add_movie,
                  3: delete_movie,
                  4: update_movie,
-                 5: movie_stats}
+                 5: movie_stats,
+                 6: random_movie}
     # Dictionary to store the movies and the rating
     movies = {
         "The Shawshank Redemption": 9.5,
